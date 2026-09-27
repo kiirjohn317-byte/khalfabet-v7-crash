@@ -1,108 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>KHALFABET V8 FINAL</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KHALFABET V8 FINAL - Real Money</title>
 <style>
-body{background:#0a0a0a;color:white;font-family:Arial;padding:10px}
-.card{background:#1a1a1a;padding:15px;border-radius:10px;margin:10px 0}
-input,button{width:100%;padding:12px;margin:5px 0;border-radius:8px;border:none}
-button{background:#00ff88;color:black;font-weight:bold;cursor:pointer}
-.admin-only{display:none}
-</style>
-</head>
-<body>
-<h1 style="color:#00ff88">KHALFABET V8 🔥</h1>
+*{box-sizing:border-box}body{margin:0;background:#080c10;color:#fff;font-family:Arial;padding:10px}
+h1{text-align:center;color:#00ff88;margin:5px}
+.card{background:#151b23;border:1px solid #222;padding:14px;border-radius:14px;margin:10px 0}
+input,button{width:100%;padding:13px;margin:6px 0;border-radius:10px;border:none;font-size:16px}
+input{background:#0e141b;color:#fff;border:1px solid #333}
+button{background:#00ff88;color:#000;font-weight:900;cursor:pointer}
+button.red{background:#ff2d55;color:#fff}
+#game{background:#000;border:2px solid #00ff88;border-radius:16px;height:260px;position:relative;overflow:hidden}
+#plane{position:absolute;left:15px;bottom:25px;font-size:42px;z-index:2;transition:all .08s linear}
+#trail{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1}
+#mult{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:56px;font-weight:900;color:#00ff88;z-index:3;text-shadow:0 0 20px #00ff88}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hide{display:none}.green{color:#00ff88}.redtext{color:#ff2d55}
+.small{font-size:12px;opacity:.7}
+</style></head><body>
+<h1>KHALFABET ✈️ V8 FINAL</h1>
 
-<div id="auth" class="card">
+<div id="game"><canvas id="trail"></canvas><div id="plane">✈️</div><div id="mult">1.00x</div></div>
+
+<div class="card grid">
+<div><button id="betBtn" onclick="placeBet()">BET 1000 UGX</button><div class="small">Balance: <span id="bal">0</span> UGX | Win: <span id="win">0</span></div></div>
+<div><button class="red" onclick="cashout()">CASHOUT</button><div class="small">Potential x <span id="pmult">-</span></div></div>
+</div>
+
+<div id="authCard" class="card">
 <h3>Login / Register</h3>
-<input id="phone" placeholder="Phone e.g 0785...">
-<input id="pass" type="password" placeholder="Password">
-<button onclick="register()">REGISTER</button>
-<button onclick="login()">LOGIN</button>
-<p>Balance: <span id="bal">0</span> UGX</p>
-</div>
-
-<div class="card">
-<h3>Deposit MoMo: 0785344451</h3>
-<input id="amount" placeholder="Amount">
-<input id="txid" placeholder="TxID from MTN">
-<button onclick="deposit()">Submit Deposit</button>
-</div>
-
-<div id="adminLogin" class="card">
-<h3>Admin Login</h3>
-<input id="adminPass" type="password" placeholder="Admin Password">
-<button onclick="adminLogin()">Enter Admin</button>
-</div>
-
-<div id="adminPanel" class="card admin-only">
-<h3>Admin Panel - Deposits</h3>
-<div id="deposits"></div>
-</div>
-
-<script>
-// DATABASE using localStorage (upgrade to Supabase later)
-let users = JSON.parse(localStorage.getItem('khalfa_users')||'{}');
-let deposits = JSON.parse(localStorage.getItem('khalfa_deps')||'[]');
-let currentUser = null;
-
-function register(){
- let p=phone.value, pw=pass.value;
- if(!p||!pw){alert('Enter phone & password');return}
- if(users[p]){alert('Already exists, login');return}
- users[p]={password:pw,balance:0};
- localStorage.setItem('khalfa_users',JSON.stringify(users));
- alert('Registered! Now Login');
-}
-
-function login(){
- let p=phone.value, pw=pass.value;
- if(users[p] && users[p].password===pw){
-  currentUser=p;
-  bal.innerText=users[p].balance;
-  alert('Welcome '+p);
- } else alert('Wrong phone/password');
-}
-
-function deposit(){
- let amt=amount.value, tx=txid.value;
- if(!currentUser){alert('Login first');return}
- deposits.push({phone:currentUser,amount:amt,txid:tx,status:'pending'});
- localStorage.setItem('khalfa_deps',JSON.stringify(deposits));
- alert('Deposit sent! Wait admin approval');
- renderDeps();
-}
-
-function adminLogin(){
- if(adminPass.value==='KhalfaAdmin@0785'){
-  document.getElementById('adminPanel').style.display='block';
-  alert('Admin OK');
-  renderDeps();
- } else alert('Wrong admin password');
-}
-
-function renderDeps(){
- let html='';
- deposits.forEach((d,i)=>{
-  html+=`<div style="border:1px solid #333;padding:8px;margin:5px">Phone:${d.phone} Amt:${d.amount} Tx:${d.txid} <button onclick="approve(${i})">APPROVE</button></div>`;
- });
- depositsDiv=document.getElementById('deposits');
- if(depositsDiv) depositsDiv.innerHTML=html;
-}
-
-function approve(i){
- let d=deposits[i];
- if(users[d.phone]){
-  users[d.phone].balance+=parseInt(d.amount);
-  localStorage.setItem('khalfa_users',JSON.stringify(users));
-  deposits[i].status='approved';
-  localStorage.setItem('khalfa_deps',JSON.stringify(deposits));
-  alert('Approved '+d.amount+' to '+d.phone);
-  renderDeps();
- }
-}
-renderDeps();
-</script>
-</body>
-  </html>
+<input id="phone" placeholder="Phone 0785xxxxxx">
+<input id="pass" type="password" placeholder="Password (min 4)">
+<div class="grid"><button onclick="register()">REGISTER</button><button onclick="login()" style="background:#fff">LOGIN</button></div>
+<div class="small">Logged as: <span id="who">Not logged</span></div>
+</div
