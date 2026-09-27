@@ -1,36 +1,26 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KHALFABET V8 FINAL - Real Money</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#080c10;color:#fff;font-family:Arial;padding:10px}
-h1{text-align:center;color:#00ff88;margin:5px}
-.card{background:#151b23;border:1px solid #222;padding:14px;border-radius:14px;margin:10px 0}
-input,button{width:100%;padding:13px;margin:6px 0;border-radius:10px;border:none;font-size:16px}
-input{background:#0e141b;color:#fff;border:1px solid #333}
-button{background:#00ff88;color:#000;font-weight:900;cursor:pointer}
-button.red{background:#ff2d55;color:#fff}
-#game{background:#000;border:2px solid #00ff88;border-radius:16px;height:260px;position:relative;overflow:hidden}
-#plane{position:absolute;left:15px;bottom:25px;font-size:42px;z-index:2;transition:all .08s linear}
-#trail{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1}
-#mult{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:56px;font-weight:900;color:#00ff88;z-index:3;text-shadow:0 0 20px #00ff88}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.hide{display:none}.green{color:#00ff88}.redtext{color:#ff2d55}
-.small{font-size:12px;opacity:.7}
-</style></head><body>
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>KHALFABET V8</title><style>body{margin:0;background:#070c11;color:#fff;font-family:sans-serif;padding:8px}h1{text-align:center;color:#0f8;margin:6px 0}.c{background:#141b24;border-radius:12px;padding:12px;margin:8px 0;border:1px solid #222}input,button{width:100%;padding:12px;margin:5px 0;border-radius:10px;border:0;font-size:15px}input{background:#0c131a;color:#fff;border:1px solid #333}button{background:#0f8;color:#000;font-weight:900}button.r{background:#f25;color:#fff}.g{display:grid;grid-template-columns:1fr 1fr;gap:8px}#gm{background:#000;border:2px solid #0f8;border-radius:14px;height:240px;position:relative;overflow:hidden}#pl{position:absolute;left:10px;bottom:20px;font-size:36px;z-index:2}#mu{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:48px;font-weight:900;color:#0f8;z-index:3}.hide{display:none}.sm{font-size:11px;opacity:.7}.ok{color:#0f8}</style></head><body>
 <h1>KHALFABET ✈️ V8 FINAL</h1>
-
-<div id="game"><canvas id="trail"></canvas><div id="plane">✈️</div><div id="mult">1.00x</div></div>
-
-<div class="card grid">
-<div><button id="betBtn" onclick="placeBet()">BET 1000 UGX</button><div class="small">Balance: <span id="bal">0</span> UGX | Win: <span id="win">0</span></div></div>
-<div><button class="red" onclick="cashout()">CASHOUT</button><div class="small">Potential x <span id="pmult">-</span></div></div>
-</div>
-
-<div id="authCard" class="card">
-<h3>Login / Register</h3>
-<input id="phone" placeholder="Phone 0785xxxxxx">
-<input id="pass" type="password" placeholder="Password (min 4)">
-<div class="grid"><button onclick="register()">REGISTER</button><button onclick="login()" style="background:#fff">LOGIN</button></div>
-<div class="small">Logged as: <span id="who">Not logged</span></div>
-</div
+<div id=gm><canvas id=cv style="width:100%;height:100%"></canvas><div id=pl>✈️</div><div id=mu>1.00x</div></div>
+<div class=c><div class=g><button id=bb onclick=BET()>BET 1000 UGX</button><button class=r onclick=CSH()>CASHOUT</button></div><div class=sm>Bal:<b id=bl>0</b> UGX | Win:<b id=wn>0</b> | x:<b id=px>-</b> | User:<b id=us>none</b></div></div>
+<div class=c><h3>Login / Register</h3><input id=ph placeholder="Phone 0785..."><input id=pw type=password placeholder=Password><div class=g><button onclick=REG()>REGISTER</button><button onclick=LOG() style="background:#fff">LOGIN</button></div></div>
+<div class=c><h3>Deposit - 0785344451</h3><input id=am type=number placeholder="Amount 5000"><input id=tx placeholder="MoMo TxID e.g 12345678"><button onclick=DEP()>SUBMIT DEPOSIT</button><div class=sm>Real System: Send MoMo to 0785344451, copy TxID from SMS, paste here. Admin will verify TxID on his phone and APPROVE. Real money!</div><h3>Withdraw</h3><input id=wa type=number placeholder="Amount"><input id=wp placeholder="MoMo number to receive"><button onclick=WIT() style="background:#fff">REQUEST WITHDRAW</button></div>
+<div class=c><h3>Admin Panel</h3><input id=ap type=password placeholder="Admin Password"><button onclick=ADM()>ENTER ADMIN</button></div>
+<div id=ad class="c hide"><h3 class=ok>ADMIN - 0785344451</h3><div class=sm>Users:<span id=tu>0</span> Pending:<span id=tp>0</span></div><div id=dl></div><h4>All Users DB</h4><div id=ul></div><button class=r onclick=ad.classList.add('hide')>CLOSE ADMIN</button></div>
+<script>
+U=JSON.parse(localStorage.ku||'{}');D=JSON.parse(localStorage.kd||'[]');C=localStorage.kc||'';B=0;bt=0;m=1;cr=0;iv=0;px=10;py=20;pts=[];cv=document.getElementById('cv');X=cv.getContext('2d');
+function SV(){localStorage.ku=JSON.stringify(U);localStorage.kd=JSON.stringify(D);if(C)localStorage.kc=C;UI();}
+function UI(){if(C&&U[C]){B=U[C].b;bl.innerText=B;us.innerText=C}else{bl.innerText=0;us.innerText='none'}tu.innerText=Object.keys(U).length;tp.innerText=D.filter(d=>!d.o).length;let h='';D.filter(d=>!d.o).forEach(d=>{let i=D.indexOf(d);h+=`<div style="border:1px solid #333;padding:8px;margin:4px;border-radius:8px"><b>${d.p}</b> ${d.a}UGX Tx:${d.t}<br><button onclick=AP(${i})>APPROVE</button> <button class=r onclick=RJ(${i})>REJECT</button></div>`});dl.innerHTML=h||'No pending';let u='';for(let k in U)u+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:4px"><span>${k}</span><span class=ok>${U[k].b} UGX</span> <button style="width:auto;padding:4px 8px" onclick="AB('${k}')">+BONUS</button></div>`;ul.innerHTML=u;}
+function REG(){let p=ph.value.trim(),w=pw.value.trim();if(p.length<10||w.length<4)return alert('Phone 10 + pass 4');if(U[p])return alert('Exists, LOGIN');U[p]={w:w,b:0};SV();alert('Registered! Now LOGIN');}
+function LOG(){let p=ph.value.trim(),w=pw.value.trim();if(!U[p]||U[p].w!=w)return alert('Wrong phone/pass');C=p;SV();alert('Welcome '+p);}
+function DEP(){if(!C)return alert('Login first');let a=+am.value,t=tx.value.trim();if(!a||a<1000)return alert('Min 1000');if(t.length<4)return alert('Enter TxID from MoMo SMS');D.push({p:C,a:a,t:t,o:0});SV();alert('Deposit sent! Admin will check TxID '+t+' on phone 0785344451');am.value='';tx.value='';}
+function WIT(){if(!C)return alert('Login');let a=+wa.value;if(!a||a<2000||B<a)return alert('Low balance/min 2000');B-=a;U[C].b=B;SV();alert('Withdraw '+a+' to '+wp.value+' requested');}
+function ADM(){if(ap.value!='KhalfaAdmin@0785')return alert('Wrong admin pass');ad.classList.remove('hide');UI();}
+function AP(i){let d=D[i];U[d.p].b+=+d.a;d.o=1;SV();alert('Approved '+d.a+' to '+d.p);}
+function RJ(i){D.splice(i,1);SV();}
+function AB(p){let a=+prompt('Bonus amount for '+p);if(a){U[p].b+=a;SV();}}
+function RS(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight}RS();
+function SR(){cr=0;m=1;px=10;py=20;pts=[];mu.innerText='1.00x';mu.style.color='#0f8';pl.style.left=px+'px';pl.style.bottom=py+'px';bb.disabled=0;X.clearRect(0,0,cv.width,cv.height);clearInterval(iv);let cp=1.2+Math.random()*4;if(Math.random()<0.18)cp=1.05+Math.random()*.8;iv=setInterval(()=>{m+=.018+m*.007;mu.innerText=m.toFixed(2)+'x';px_2=document.getElementById('px');px_2.innerText=m.toFixed(2);pl.style.left=(px+=2.2)+'px';pl.style.bottom=(py+=1.1)+'px';pts.push({x:px,y:cv.height-py});if(pts.length>90)pts.shift();X.clearRect(0,0,cv.width,cv.height);X.strokeStyle='#0f8';X.lineWidth=3;X.beginPath();pts.forEach((p,i)=>i?X.lineTo(p.x,p.y):X.moveTo(p.x,p.y));X.stroke();if(bt)wn.innerText=Math.floor(bt*m);if(m>=cp){cr=1;clearInterval(iv);mu.innerText='CRASH '+m.toFixed(2)+'x';mu.style.color='#f25';if(bt){bt=0;wn.innerText=0;bb.innerText='BET 1000 UGX';}setTimeout(SR,3000);}},80);}
+function BET(){if(!C)return alert('Register & Login');if(bt)return alert('Bet placed');if(B<1000)return alert('Low balance - Deposit first');bt=1000;B-=1000;U[C].b=B;SV();bb.innerText='BET PLACED';bb.disabled=1;}
+function CSH(){if(!bt||cr)return alert('No bet');let w=Math.floor(bt*m);B+=w;U[C].b=B;bt=0;wn.innerText=0;bb.innerText='BET 1000 UGX';bb.disabled=0;SV();alert('WON '+w+' UGX @ '+m.toFixed(2)+'x');}
+UI();SR();
+</script></body></html>
