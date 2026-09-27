@@ -3,67 +3,253 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KHALFABET - UGX CRASH</title>
+<title>KHALFABET CRASH ✈️</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#070d1e;color:#fff}
-.top{display:flex;justify-content:space-between;align-items:center;padding:10px;background:#101c36;border-bottom:3px solid #ff004d}
-.logo{font-weight:900;font-size:23px}.logo b:nth-child(1){color:#ff004d}.logo b:nth-child(2){color:#00ff88}
-.bal{background:#18264d;border:1px solid #2a3f77;padding:8px 12px;border-radius:12px;text-align:right;min-width:140px}
-#bal{color:#00ff88;font-weight:900;font-size:20px}
-.bal button{width:100%;border:none;padding:6px;border-radius:20px;font-weight:900;font-size:11px;margin-top:5px}
-.d{background:#ffcc00;color:#000}.w{background:#2a375c;color:#fff}
-.stage{height:340px;position:relative;background:radial-gradient(ellipse at 50% 120%,#1e3a8a,#070d1e);overflow:hidden}
+body{background:#070d1e;color:#fff;max-width:480px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px;background:#101c36;border-bottom:3px solid #ffcc00}
+.logo{font-weight:900;font-size:22px;color:#ffcc00}
+.logo small{display:block;font-size:10px;color:#fff;font-weight:400;letter-spacing:1px}
+.bal{text-align:right}
+.bal b{color:#00ff88;font-size:18px;display:block}
+.bal span{font-size:10px;color:#8a9bb5}
+.stage{height:380px;background:radial-gradient(ellipse at center,#1e3a8a 0%,#070d1e 70%);position:relative;overflow:hidden;border-bottom:2px solid #1e3a8a}
 canvas{width:100%;height:100%;display:block}
-#ui{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-#status{background:#101c36;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:8px}
-#mult{font-size:68px;font-weight:900}
-#msg{font-size:13px;color:#8a9bb5;margin-top:6px}
-.hist{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#0c142b}
-.hist div{background:#18264d;border:1px solid #2a3a66;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:900}
-.bets{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-.card{background:#111e3a;border:1px solid #22345e;border-radius:16px;padding:12px}
-.inp{width:100%;background:#070d1e;border:1.5px solid #2a3a66;border-radius:10px;padding:12px;color:#fff;text-align:center;font-weight:900;font-size:16px;margin:8px 0}
-.quick{display:flex;gap:5px}.quick button{flex:1;background:#18264d;border:1px solid #2a3a66;color:#aaa;padding:6px;border-radius:8px;font-size:11px}
-.betBtn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;font-size:14px;margin-top:8px}
-.bet{background:#00c853;color:#fff}.cash{background:#ffab00;color:#000}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px}
-.show{display:flex!important}.box{background:#132042;border:1.5px solid #2a3f77;border-radius:18px;padding:18px;width:100%;max-width:380px}
-.f{width:100%;background:#070d1e;border:1.5px solid #2a3a66;border-radius:12px;padding:14px;color:#fff;margin-bottom:10px}
-.paybox{background:#070d1e;border:2px dashed #ffcc00;border-radius:12px;padding:12px;text-align:center;margin:10px 0}
-.num{color:#ffcc00;font-weight:900;font-size:22px}
-.paybtn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900}
-.yellow{background:#ffcc00;color:#000}.green{background:#00c853;color:#fff}
+#center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#mult{font-size:64px;font-weight:900;text-shadow:0 0 15px #000}
+#stat{background:#101c36;padding:6px 16px;border-radius:20px;font-size:12px;margin-top:8px;border:1px solid #2a3f77}
+.hist{display:flex;gap:6px;padding:8px;background:#0d1730;overflow-x:auto}
+.hist span{padding:5px 10px;border-radius:20px;font-weight:900;font-size:12px;background:#18264d;border:1px solid #2a3f77;white-space:nowrap}
+.panel{padding:10px;background:#101c36}
+.boxBet{background:#18264d;border:1px solid #2a3f77;border-radius:14px;padding:10px;margin-bottom:10px}
+.row{display:flex;gap:6px;margin-bottom:8px}
+input{flex:1;padding:12px;border-radius:10px;border:1px solid #2a3f77;background:#070d1e;color:#fff;font-weight:900}
+button{border:none;border-radius:10px;font-weight:900;cursor:pointer;padding:12px}
+.q{background:#2a3f77;color:#fff;min-width:55px}
+.betBtn{flex:1;background:#ffcc00;color:#000;font-size:15px}
+.cashBtn{flex:1;background:#00c851;color:#fff;font-size:14px;animation:pulse 0.8s infinite}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+.depBtn{width:100%;background:linear-gradient(90deg,#ffcc00,#ff9900);color:#000;margin-top:8px}
+.withBtn{width:100%;background:#1e2d50;color:#fff;border:1px solid #3a4f87;margin-top:8px}
+#admin{background:#fff;color:#000;border-radius:12px;padding:12px;margin:10px;display:none}
+#admin h3{color:#ff0040}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:999;padding:15px}
+.mBox{background:#18264d;border:2px solid #ffcc00;border-radius:16px;padding:20px;width:100%;max-width:360px}
+.mBox input{width:100%;margin:6px 0}
+.mBox button{width:100%;margin-top:8px}
 </style>
 </head>
 <body>
-<div class="top"><div class="logo"><b>KHALFA</b><b>BET</b></div><div class="bal"><small id="userPhone">GUEST</small><small>BALANCE UGX</small><div id="bal">15,000</div><button class="d" onclick="openM('depM')">+ DEPOSIT</button><button class="w" onclick="openM('withM')">WITHDRAW</button></div></div>
-<div class="stage"><canvas id="c"></canvas><div id="ui"><div id="status">WAITING</div><div id="mult">1.00x</div><div id="msg">Place your bet ✈️</div></div></div>
-<div class="hist" id="hist"></div>
-<div class="bets">
-<div class="card"><small>BET 1</small><input id="b1" class="inp" type="number" value="1000"><div class="quick"><button onclick="b1.value=1000">1K</button><button onclick="b1.value=5000">5K</button><button onclick="b1.value=10000">10K</button></div><button id="btn1" class="betBtn bet" onclick="doBet(1)">BET 1000</button></div>
-<div class="card"><small>BET 2</small><input id="b2" class="inp" type="number" value="2000"><div class="quick"><button onclick="b2.value=1000">1K</button><button onclick="b2.value=5000">5K</button><button onclick="b2.value=10000">10K</button></div><button id="btn2" class="betBtn bet" onclick="doBet(2)">BET 2000</button></div>
+<div class="top">
+<div class="logo">✈️ KHALFABET<small id="uPhone">MTN: 0785 344 451 • GUEST</small></div>
+<div class="bal"><b id="bal">15,000 UGX</b><span>BALANCE</span></div>
 </div>
-<div class="modal show" id="regM"><div class="box"><h3 style="text-align:center">🔥 JOIN KHALFABET</h3><input id="rName" class="f" placeholder="Your Name"><input id="rPhone" class="f" type="tel" placeholder="MTN Number 078..."><input id="rPass" class="f" type="password" placeholder="Password (4 digits)"><button class="paybtn green" onclick="doReg()">REGISTER & PLAY 🚀</button><p style="font-size:11px;color:#8a9bb5;text-align:center;margin-top:8px">Bonus 15,000 UGX free!</p></div></div>
-<div class="modal" id="depM"><div class="box"><div style="text-align:right" onclick="closeM('depM')">✕ Close</div><h3 style="text-align:center">💛 DEPOSIT MTN MoMo</h3><input id="dAmt" class="f" type="number" placeholder="Amount min 500"><input id="dPhone" class="f" type="tel" placeholder="Your MTN Number"><div class="paybox"><small>SEND MONEY TO</small><div class="num">0785 344 451</div><small>Name: KHALFABET<br>Dial *165*1*1# → Number → Amount → PIN</small></div><button class="paybtn yellow" onclick="confirmDep()">I HAVE SENT ✅</button></div></div>
-<div class="modal" id="withM"><div class="box"><div style="text-align:right" onclick="closeM('withM')">✕ Close</div><h3 style="text-align:center">WITHDRAW</h3><input id="wAmt" class="f" type="number" placeholder="Amount min 1000"><input id="wPhone" class="f" type="tel" placeholder="Your MTN to receive"><div class="paybox" style="border-color:#00c853"><small>YOU RECEIVE FROM</small><div class="num" style="color:#00ff88">0785 344 451</div><small>Fee 10% - 2-10 mins</small></div><button class="paybtn green" onclick="confirmWith()">REQUEST</button></div></div>
+
+<div class="stage"><canvas id="c"></canvas>
+<div id="center">
+<div id="mult">1.00x</div>
+<div id="stat">WAITING FOR NEXT ROUND</div>
+</div>
+</div>
+
+<div class="hist" id="hist"></div>
+
+<div class="panel">
+<div class="boxBet">
+<div class="row"><input id="a1" type="number" value="1000"><button class="q" onclick="setA(1,500)">500</button><button class="q" onclick="setA(1,1000)">1K</button><button class="q" onclick="setA(1,5000)">5K</button></div>
+<div class="row"><button id="b1" class="betBtn" onclick="bet(1)">BET 1000 UGX</button></div>
+</div>
+
+<div class="boxBet">
+<div class="row"><input id="a2" type="number" value="2000"><button class="q" onclick="setA(2,2000)">2K</button><button class="q" onclick="setA(2,5000)">5K</button><button class="q" onclick="setA(2,10000)">10K</button></div>
+<div class="row"><button id="b2" class="betBtn" style="background:#ff6a00;color:#fff" onclick="bet(2)">BET 2000 UGX</button></div>
+</div>
+
+<button class="depBtn" onclick="openM('depM')">+ DEPOSIT • MTN 0785 344 451</button>
+<button class="withBtn" onclick="openM('withM')">- WITHDRAW (10% FEE)</button>
+
+<div id="admin">
+<h3>👑 ADMIN PANEL - 0785344451</h3>
+<p style="font-size:12px;margin:6px 0">You see all deposits & withdrawals here. You are the bank!</p>
+<div id="aList">No pending transactions</div>
+<button onclick="clearAll()" style="background:#ff0040;color:#fff;width:100%;margin-top:10px">CLEAR ALL</button>
+</div>
+</div>
+
+<div id="regM" class="modal" style="display:flex"><div class="mBox">
+<h2 style="color:#ffcc00;text-align:center">JOIN KHALFABET</h2>
+<p style="font-size:12px;text-align:center;margin:8px 0;color:#8a9bb5">Get 15,000 UGX FREE Bonus!</p>
+<input id="rName" placeholder="Full Name">
+<input id="rPhone" placeholder="MTN Number 07...">
+<input id="rPass" type="password" placeholder="Password">
+<button class="depBtn" onclick="register()">REGISTER & GET BONUS</button>
+<p style="text-align:center;font-size:12px;margin-top:10px">Have account? <span onclick="login()" style="color:#ffcc00;text-decoration:underline;cursor:pointer">Login</span></p>
+</div></div>
+
+<div id="depM" class="modal"><div class="mBox">
+<h3>DEPOSIT MONEY</h3>
+<p style="font-size:12px;margin:8px 0;line-height:1.4">1. Dial <b>*165*1*1#</b><br>2. Send to <b>0785344451</b><br>3. Names: <b>KIIR JOHN</b><br>4. Enter TxID below</p>
+<input id="dAmt" type="number" placeholder="Amount (min 1000)">
+<input id="dTx" placeholder="MoMo TxID e.g 1234567890">
+<button class="depBtn" onclick="doDep()">I HAVE SENT MONEY ✓</button>
+<button class="withBtn" onclick="closeM('depM')">CANCEL</button>
+</div></div>
+
+<div id="withM" class="modal"><div class="mBox">
+<h3>WITHDRAW MONEY</h3>
+<p style="font-size:11px;color:#8a9bb5">10% fee deducted. You receive 90%</p>
+<input id="wAmt" type="number" placeholder="Amount (min 2000)">
+<input id="wPhone" placeholder="Your MTN Number to receive">
+<button class="depBtn" style="background:#00c851;color:#fff" onclick="doWith()">CONFIRM WITHDRAW</button>
+<button class="withBtn" onclick="closeM('withM')">CANCEL</button>
+</div></div>
+
 <script>
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');
-function resize(){canvas.width=canvas.clientWidth*2;canvas.height=canvas.clientHeight*2}resize();window.onresize=resize;
-let bal=parseInt(localStorage.getItem('kb_bal')||'15000');let user=localStorage.getItem('kb_user')||'';let mult=1,playing=false,crash=0,prog=0,act=[null,null];
-const balEl=document.getElementById('bal'),multEl=document.getElementById('mult'),statusEl=document.getElementById('status'),msgEl=document.getElementById('msg'),histEl=document.getElementById('hist'),userEl=document.getElementById('userPhone');
-if(user){userEl.innerText=user;document.getElementById('regM').classList.remove('show')}
-function upBal(){balEl.innerText=bal.toLocaleString();localStorage.setItem('kb_bal',bal)}upBal();
-function openM(id){document.getElementById(id).classList.add('show')}function closeM(id){document.getElementById(id).classList.remove('show')}
-function doReg(){let n=document.getElementById('rName').value.trim();let p=document.getElementById('rPhone').value.trim();let pw=document.getElementById('rPass').value.trim();if(n.length<2)return alert('Enter name');if(p.length<9)return alert('Enter MTN 078...');if(pw.length<4)return alert('Password min 4');localStorage.setItem('kb_user',p);localStorage.setItem('kb_name',n);userEl.innerText=p;closeM('regM');alert('Welcome '+n+'! Bonus 15000 UGX!')}
-function confirmDep(){let a=parseInt(document.getElementById('dAmt').value);let p=document.getElementById('dPhone').value;if(!a||a<500)return alert('Min 500');if(p.length<9)return alert('Enter MTN');bal+=a;upBal();closeM('depM');alert('Added '+a+' UGX! Send '+a+' to 0785344451. Bal:'+bal);}
-function confirmWith(){let a=parseInt(document.getElementById('wAmt').value);let p=document.getElementById('wPhone').value;if(!a||a<1000)return alert('Min 1000');if(a>bal)return alert('Low bal '+bal);if(p.length<9)return alert('Enter number');let f=Math.floor(a*0.1);bal-=a;upBal();closeM('withM');alert('Withdraw '+a+' fee '+f+' you get '+(a-f)+' to '+p+' from 0785344451');}
-function doBet(n){let i=n-1,amt=parseInt(document.getElementById('b'+n).value),btn=document.getElementById('btn'+n);if(act[i]&&playing){let win=Math.floor(act[i]*mult);bal+=win;upBal();btn.innerText='BET '+amt;btn.className='betBtn bet';act[i]=null;msgEl.innerText='Won '+win+' at '+mult.toFixed(2)+'x';msgEl.style.color='#0f8';return}if(playing)return alert('Flying wait!');if(amt<500)return alert('Min 500');if(amt>bal){alert('Low bal deposit');openM('depM');return}bal-=amt;upBal();act[i]=amt;btn.innerText='CASHOUT '+mult.toFixed(2)+'x';btn.className='betBtn cash';if(!playing)startGame();}
-function startGame(){playing=true;mult=1;prog=0;let r=Math.random();crash=r<0.2?1.1+Math.random()*0.9:r<0.5?1.3+Math.random()*1.7:r<0.8?2+Math.random()*4:5+Math.random()*12;statusEl.innerText='FLYING ✈️';statusEl.style.background='#00c853';loop();}
-function loop(){if(!playing)return;prog+=0.01;mult=1+Math.pow(prog*2.5,1.7);multEl.innerText=mult.toFixed(2)+'x';if(act[0])document.getElementById('btn1').innerText='CASHOUT '+mult.toFixed(2)+'x '+(act[0]*mult|0);if(act[1])document.getElementById('btn2').innerText='CASHOUT '+mult.toFixed(2)+'x '+(act[1]*mult|0);if(mult>=crash){doCrash();return}draw(prog,false);requestAnimationFrame(loop);}
-function doCrash(){playing=false;draw(prog,true);multEl.innerText=crash.toFixed(2)+'x CRASHED!';multEl.style.color='#ff004d';statusEl.innerText='CRASHED 💥';statusEl.style.background='#ff004d';if(act[0]||act[1]){msgEl.innerText='Crashed lost!';msgEl.style.color='#f04'}act=[null,null];document.getElementById('btn1').innerText='BET '+document.getElementById('b1').value;document.getElementById('btn1').className='betBtn bet';document.getElementById('btn2').innerText='BET '+document.getElementById('b2').value;document.getElementById('btn2').className='betBtn bet';let d=document.createElement('div');d.innerText=crash.toFixed(2)+'x';d.style.color=crash<2?'#fa0':crash<5?'#0f8':'#f0f';histEl.prepend(d);setTimeout(()=>{multEl.style.color='#fff';multEl.innerText='1.00x';statusEl.innerText='WAITING';statusEl.style.background='#101c36';msgEl.innerText='Place bet ✈️';msgEl.style.color='#8a9bb5';draw(0,false)},3000);}
-function draw(p,isCrash){ctx.clearRect(0,0,canvas.width,canvas.height);let w=canvas.width,h=canvas.height;ctx.strokeStyle='rgba(60,80,120,.15)';ctx.lineWidth=2;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,h*i/5);ctx.lineTo(w,h*i/5);ctx.stroke()}ctx.beginPath();ctx.strokeStyle=isCrash?'#ff004d':'#00ff88';ctx.lineWidth=6;ctx.lineCap='round';for(let i=0;i<=50;i++){let t=i/50*p,X=t*w*0.85,Y=h-Math.pow(t*2.2,1.6)*h*0.65-h*0.15;if(i==0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y)}ctx.stroke();let px=p*w*0.85,py=h-Math.pow(p*2.2,1.6)*h*0.65-h*0.15;ctx.save();ctx.translate(px,py);ctx.rotate(-0.4);ctx.font='50px serif';ctx.fillText(isCrash?'💥':'✈️',-15,-5);ctx.restore();}
-draw(0,false);
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+let bal=15000,mult=1,flying=false,trail=[],bet1=null,bet2=null;
+let hist=JSON.parse(localStorage.getItem('k_hist')||'[2.34,1.20,5.60,1.01,3.80,12.5]');
+let userPhone=localStorage.getItem('k_phone')||'';
+if(userPhone){bal=+(localStorage.getItem('bal_'+userPhone)||15000)}
+
+function resize(){cv.width=cv.offsetWidth*2;cv.height=cv.offsetHeight*2}window.onresize=resize;resize();
+
+function updateUI(){
+document.getElementById('bal').innerText=bal.toLocaleString()+' UGX';
+document.getElementById('uPhone').innerText='MTN: 0785 344 451 • '+(userPhone||'GUEST');
+if(userPhone) localStorage.setItem('bal_'+userPhone,bal);
+let ph=userPhone.replace(/\s/g,'');
+if(ph==='0785344451'||ph==='785344451'||ph==='+256785344451'){document.getElementById('admin').style.display='block';loadAdmin()}
+}
+updateUI();
+
+function setA(n,v){document.getElementById('a'+n).value=v;let b=document.getElementById('b'+n);if(b.className==='betBtn' || b.style.background.includes('ff6a00')) b.innerText='BET '+v+' UGX'}
+
+function bet(n){
+if(flying) return alert('Round already flying! Wait next round');
+let amt=+document.getElementById('a'+n).value;
+if(amt<100) return alert('Min 100 UGX');
+if(amt>bal) return alert('Low balance! Deposit to 0785344451');
+bal-=amt;updateUI();
+if(n===1){
+bet1={amt,active:true};
+let b=document.getElementById('b1');b.className='cashBtn';b.innerText='CASHOUT '+amt+' @ 1.00x';b.onclick=()=>cashout(1);
+}else{
+bet2={amt,active:true};
+let b=document.getElementById('b2');b.className='cashBtn';b.innerText='CASHOUT '+amt+' @ 1.00x';b.onclick=()=>cashout(2);
+}
+}
+
+function cashout(n){
+if(!flying) return;
+let b=n===1?bet1:bet2;if(!b||!b.active) return;
+let win=Math.floor(b.amt*mult);
+bal+=win;updateUI();b.active=false;
+let btn=document.getElementById('b'+n);
+btn.innerText='WON '+win.toLocaleString()+' UGX ✓';
+btn.style.background='#00c851';
+setTimeout(()=>{
+btn.className='betBtn';btn.style.background=n===1?'#ffcc00':'#ff6a00';btn.style.color=n===1?'#000':'#fff';
+btn.innerText='BET '+document.getElementById('a'+n).value+' UGX';btn.onclick=()=>bet(n);
+if(n===1)bet1=null;else bet2=null;
+},1500);
+}
+
+function renderHist(){
+document.getElementById('hist').innerHTML=hist.slice(0,25).map(v=>`<span style="color:${v<2?'#ff4d4d':v<5?'#ffcc00':'#00ff88'}">${v.toFixed(2)}x</span>`).join('');
+}renderHist();
+
+function drawPlane(){
+ctx.clearRect(0,0,cv.width,cv.height);
+// grid
+ctx.strokeStyle='#1e3a5a';ctx.lineWidth=1;
+for(let i=0;i<5;i++){let y=cv.height - (i/5)*cv.height*0.7 -30;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(cv.width,y);ctx.stroke()}
+if(trail.length<2) return;
+ctx.strokeStyle='#ffcc00';ctx.lineWidth=6;ctx.lineJoin='round';ctx.beginPath();
+trail.forEach((m,i)=>{
+let x=(i/trail.length)*cv.width*0.82+30;
+let y=cv.height - (Math.log(m)/Math.log(25))*cv.height*0.65 -40;
+if(i===0) ctx.moveTo(x,y);else ctx.lineTo(x,y);
+});ctx.stroke();
+// plane
+let last=trail[trail.length-1];
+let x=cv.width*0.82+10;
+let y=cv.height - (Math.log(last)/Math.log(25))*cv.height*0.65 -40;
+ctx.font='44px Arial';ctx.fillText('✈️',x,y-15);
+}
+
+function gameLoop(){
+let start=Date.now();mult=1;flying=true;trail=[];document.getElementById('mult').style.color='#fff';
+let crashAt=Math.random()<0.08?1+Math.random()*0.9:1.3+Math.random()*8.5;
+if(Math.random()<0.03) crashAt=10+Math.random()*90;
+document.getElementById('stat').innerText='✈️ FLYING...';
+let iv=setInterval(()=>{
+let elapsed=(Date.now()-start)/1000;
+mult=+(1+ elapsed*0.6 * (crashAt>10?2:1) ).toFixed(2);
+if(mult>=crashAt) mult=crashAt;
+document.getElementById('mult').innerText=mult.toFixed(2)+'x';
+if(bet1&&bet1.active) document.getElementById('b1').innerText='CASHOUT '+bet1.amt+' @ '+mult.toFixed(2)+'x = '+Math.floor(bet1.amt*mult);
+if(bet2&&bet2.active) document.getElementById('b2').innerText='CASHOUT '+bet2.amt+' @ '+mult.toFixed(2)+'x = '+Math.floor(bet2.amt*mult);
+trail.push(mult);if(trail.length>60) trail.shift();drawPlane();
+if(mult>=crashAt){
+clearInterval(iv);flying=false;
+hist.unshift(crashAt);if(hist.length>50) hist.pop();
+localStorage.setItem('k_hist',JSON.stringify(hist));renderHist();
+document.getElementById('mult').innerText=crashAt.toFixed(2)+'x CRASHED';document.getElementById('mult').style.color='#ff0040';
+document.getElementById('stat').innerText='💥 CRASHED @ '+crashAt.toFixed(2)+'x';
+if(bet1&&bet1.active){bet1=null;let b=document.getElementById('b1');b.className='betBtn';b.style.background='#ffcc00';b.style.color='#000';b.innerText='BET '+document.getElementById('a1').value+' UGX';b.onclick=()=>bet(1)}
+if(bet2&&bet2.active){bet2=null;let b=document.getElementById('b2');b.className='betBtn';b.style.background='#ff6a00';b.style.color='#fff';b.innerText='BET '+document.getElementById('a2').value+' UGX';b.onclick=()=>bet(2)}
+setTimeout(gameLoop,3500);
+}
+},45);
+}
+gameLoop();
+
+function openM(id){document.getElementById(id).style.display='flex'}
+function closeM(id){document.getElementById(id).style.display='none'}
+function register(){
+let n=document.getElementById('rName').value.trim(),p=document.getElementById('rPhone').value.trim(),pw=document.getElementById('rPass').value;
+if(n.length<2) return alert('Enter full name');
+if(p.length<9) return alert('Enter valid MTN number');
+if(pw.length<3) return alert('Enter password');
+userPhone=p;localStorage.setItem('k_phone',p);localStorage.setItem('k_name',n);
+if(!localStorage.getItem('bal_'+p)) localStorage.setItem('bal_'+p,'15000');
+bal=+(localStorage.getItem('bal_'+p));updateUI();
+document.getElementById('regM').style.display='none';
+alert('Welcome '+n+'! 15,000 UGX Bonus added! 🎉');
+}
+function login(){
+let p=prompt('Enter your MTN number:');if(!p) return;
+userPhone=p;localStorage.setItem('k_phone',p);bal=+(localStorage.getItem('bal_'+p)||15000);updateUI();
+document.getElementById('regM').style.display='none';
+}
+if(userPhone){document.getElementById('regM').style.display='none'}
+function doDep(){
+let a=+document.getElementById('dAmt').value,t=document.getElementById('dTx').value.trim();
+if(a<1000) return alert('Min deposit 1000 UGX');if(t.length<4) return alert('Enter real MoMo TxID');
+let list=JSON.parse(localStorage.getItem('k_pending')||'[]');
+list.push({type:'DEPOSIT',phone:userPhone||'GUEST',amount:a,tx:t,time:new Date().toLocaleString()});
+localStorage.setItem('k_pending',JSON.stringify(list));
+bal+=a;updateUI();closeM('depM');loadAdmin();
+alert('✅ Deposit confirmed! '+a.toLocaleString()+' UGX added. (In real business, you verify TxID on your MTN 0785344451)');
+}
+function doWith(){
+let a=+document.getElementById('wAmt').value,p=document.getElementById('wPhone').value.trim();
+if(a<2000) return alert('Min withdraw 2000');if(p.length<9) return alert('Enter MTN number');if(a>bal) return alert('Low balance');
+let fee=Math.floor(a*0.10),receive=a-fee;
+bal-=a;updateUI();
+let list=JSON.parse(localStorage.getItem('k_pending')||'[]');
+list.push({type:'WITHDRAW',phone:p,amount:a,fee:fee,receive:receive,from:userPhone,time:new Date().toLocaleString()});
+localStorage.setItem('k_pending',JSON.stringify(list));
+closeM('withM');loadAdmin();
+alert('Withdraw request sent! You will receive '+receive.toLocaleString()+' UGX (Fee '+fee+'). Boss will send via *165*');
+}
+function loadAdmin(){
+let list=JSON.parse(localStorage.getItem('k_pending')||'[]');
+if(!list.length){document.getElementById('aList').innerHTML='No pending';return}
+document.getElementById('aList').innerHTML=list.map((x,i)=>`<div style="border-bottom:1px solid #ddd;padding:8px 0;font-size:13px"><b>${x.type}</b> ${x.amount} UGX - ${x.phone} ${x.tx?'Tx:'+x.tx:''} ${x.receive?' => SEND '+x.receive+' to '+x.phone:''}<br><small>${x.time} From:${x.from||x.phone}</small> <button onclick="approve(${i})" style="background:#00c851;color:#fff;padding:4px 10px;border-radius:6px;margin-left:6px">APPROVE</button></div>`).join('');
+}
+function approve(i){let list=JSON.parse(localStorage.getItem('k_pending')||'[]');list.splice(i,1);localStorage.setItem('k_pending',JSON.stringify(list));loadAdmin();alert('Approved! If withdraw, send MoMo now via *165*')}
+function clearAll(){if(confirm('Clear all pending?')){localStorage.removeItem('k_pending');loadAdmin()}}
 </script>
 </body>
   </html>
