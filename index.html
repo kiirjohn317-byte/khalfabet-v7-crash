@@ -3,52 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KHALFABET V8 - REAL</title>
+<title>KHALFABET V8 UGANDA</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0b0e1f;color:#fff;font-family:Arial}
 .h{background:#151a33;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #ff2040}
-.logo{font-weight:900;color:#ff2040;font-size:18px}
+.logo{font-weight:900;color:#ff2040;font-size:19px}
 .bal{color:#00ff88;font-weight:900;background:#1f2547;padding:8px 14px;border-radius:20px}
-.game{position:relative;width:100%;height:380px;background:radial-gradient(ellipse at bottom,#1e2a5a 0%,#0b0e1f 70%);overflow:hidden}
+.game{position:relative;width:100%;height:400px;background:radial-gradient(ellipse at bottom,#1e2a5a 0%,#0b0e1f 70%);overflow:hidden}
 canvas{width:100%;height:100%}
 .center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.mult{font-size:72px;font-weight:900}
+.mult{font-size:78px;font-weight:900}
 .top{position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;font-size:12px}
 .pill{background:rgba(0,0,0,.6);padding:6px 10px;border-radius:12px}
 .ctrl{padding:12px;background:#12162f;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.box{background:#1b2040;padding:12px;border-radius:10px;width:100%;max-width:360px;border:1px solid #2a3160}
-.box h4{text-align:center;margin-bottom:6px;color:#ffcc00}
-.box input{width:100%;padding:10px;border-radius:8px;border:none;background:#0b0e1f;color:#fff;text-align:center;margin:5px 0}
+.box{background:#1b2040;padding:14px;border-radius:12px;width:100%;max-width:380px;border:1px solid #2a3160}
+.box h4{color:#ffcc00;text-align:center;margin-bottom:8px}
+.box input,.box select{width:100%;padding:11px;border-radius:8px;border:none;background:#0b0e1f;color:#fff;margin:5px 0;text-align:center}
 .btn{width:100%;padding:12px;border-radius:8px;border:none;font-weight:900;cursor:pointer;margin-top:6px;font-size:15px}
 .bet{background:#00e676;color:#000}
 .cash{background:#ffcc00;color:#000}
 .dep{background:#2196F3;color:#fff}
 .wit{background:#ff5722;color:#fff}
+.copyBox{display:flex;gap:6px;align-items:center;background:#0b0e1f;padding:8px;border-radius:8px;margin:6px 0}
+.copyBox span{flex:1;font-weight:900;color:#00ff88;font-size:16px}
+.copyBtn{background:#ffcc00;color:#000;padding:8px 14px;border-radius:6px;border:none;font-weight:900;cursor:pointer}
+.small{font-size:11px;color:#aaa;text-align:center;margin-top:4px}
 </style>
 </head>
 <body>
-<div class="h"><div class="logo">KHALFABET V8</div><div class="bal"><span id="bal">0</span> UGX</div></div>
-<div class="game">
-<canvas id="c"></canvas>
-<div class="top"><div class="pill">🟢 <span id="on">357</span> online</div><div class="pill">Round <span id="rnd">1</span></div></div>
-<div class="center"><div class="mult" id="m">1.00x</div><div id="s" style="font-weight:bold">WAITING FOR NEXT ROUND</div></div>
-</div>
+<div class="h"><div class="logo">KHALFABET V8 UGANDA</div><div class="bal"><span id="bal">0</span> UGX</div></div>
+<div class="game"><canvas id="c"></canvas><div class="top"><div class="pill">🟢 <span id="on">412</span> online</div><div class="pill">Round <span id="rnd">1</span></div></div><div class="center"><div class="mult" id="m">1.00x</div><div id="s" style="font-weight:bold">AUTO FLYING...</div></div></div>
 <div class="ctrl">
-<div class="box"><h4>🎮 PLAY</h4><input type="number" id="betIn" value="1000"><button class="btn bet" id="betBtn" onclick="placeBet()">BET</button><button class="btn cash" id="cashBtn" onclick="doCash()" style="display:none">CASHOUT</button></div>
-<div class="box"><h4>💳 DEPOSIT - Send to MTN 077XXXXXX</h4><input type="text" id="depName" placeholder="Your Full Name"><input type="text" id="depPhone" placeholder="Your Phone Number"><input type="number" id="depAmt" placeholder="Amount UGX"><input type="text" id="depTx" placeholder="MTN TxID e.g 123456"><button class="btn dep" onclick="reqDep()">REQUEST DEPOSIT</button><div id="depStat" style="font-size:12px;margin-top:6px;color:#00ff88"></div></div>
-<div class="box"><h4>💸 WITHDRAW</h4><input type="text" id="witName" placeholder="Your Full Name"><input type="text" id="witPhone" placeholder="MTN Number to receive money"><input type="number" id="witAmt" placeholder="Amount UGX"><button class="btn wit" onclick="reqWit()">REQUEST WITHDRAW</button><div id="witStat" style="font-size:12px;margin-top:6px;color:#ffaa00"></div></div>
+<div class="box"><h4>🎮 AVIATOR AUTO - Max Bet 20k Max Win 500k</h4><input type="number" id="betIn" value="1000" min="100" max="20000"><button class="btn bet" id="betBtn" onclick="placeBet()">BET FOR NEXT ROUND</button><button class="btn cash" id="cashBtn" onclick="doCash()" style="display:none">CASHOUT</button><div class="small">Plane flies AUTO every round - Min 100 Max 20,000</div></div>
+<div class="box"><h4>💳 DEPOSIT - Min 500 UGX</h4><div class="copyBox"><span id="myNum">0785344451</span><button class="copyBtn" onclick="copyNum()">COPY</button></div><div class="small">Send MoMo to number above first!</div><input type="text" id="depName" placeholder="Full Name"><input type="text" id="depPhone" placeholder="Your Number (from)"><select id="depNet"><option value="">Select Network</option><option>MTN</option><option>Airtel</option></select><input type="number" id="depAmt" placeholder="Amount min 500" min="500"><input type="text" id="depTx" placeholder="TxID from MoMo SMS"><button class="btn dep" onclick="reqDep()">SUBMIT DEPOSIT</button><div id="depStat" style="font-size:12px;color:#00ff88;margin-top:6px"></div></div>
+<div class="box"><h4>💸 WITHDRAW - Min 3,000 UGX</h4><input type="number" id="witAmt" placeholder="Amount min 3000" min="3000"><input type="text" id="witPhone" placeholder="Number to receive"><input type="text" id="witName" placeholder="Your MoMo Name"><button class="btn wit" onclick="reqWit()">SUBMIT WITHDRAW</button><div id="witStat" style="font-size:12px;color:#ffaa00;margin-top:6px"></div></div>
 </div>
 <script>
 const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');let W,H;function rs(){W=canvas.width=canvas.offsetWidth*2;H=canvas.height=canvas.offsetHeight*2}rs();addEventListener('resize',rs);
-let mult=1,state='wait',crash=2,px=80,py=H-60,trail=[],t0=0,bal=parseInt(localStorage.getItem('kb_bal')||'0'),hasBet=false,betAmt=0,rnd=1;
+let mult=1,state='wait',crash=2.5,px=80,py=H-60,trail=[],t0=0,bal=parseInt(localStorage.getItem('kb_bal')||'0'),hasBet=false,betAmt=0,rnd=1;
+if(isNaN(bal)||bal>1000000){bal=0;localStorage.setItem('kb_bal','0');}
 const mEl=document.getElementById('m'),sEl=document.getElementById('s'),balEl=document.getElementById('bal'),betBtn=document.getElementById('betBtn'),cashBtn=document.getElementById('cashBtn');
 balEl.textContent=bal;
-function getCrash(){let r=Math.random();if(r<0.5)return 1.1+Math.random()*0.9;if(r<0.8)return 2+Math.random()*2;if(r<0.93)return 4+Math.random()*4;return 8+Math.random()*12}
-function placeBet(){let a=parseInt(document.getElementById('betIn').value);if(bal<=0){alert('0 UGX! Deposit first! Wait admin approve!');return}if(a>bal){alert('Low balance!');return}if(hasBet)return;betAmt=a;hasBet=true;bal-=a;saveBal();betBtn.style.display='none';cashBtn.style.display='block';sEl.textContent='BET '+a+' UGX PLACED - GOOD LUCK!';}
-function doCash(){if(!hasBet||state!=='fly')return;let win=Math.floor(betAmt*mult);bal+=win;saveBal();sEl.textContent='💰 WIN '+win+' UGX at '+mult.toFixed(2)+'x!';hasBet=false;betBtn.style.display='block';cashBtn.style.display='none';}
-function saveBal(){localStorage.setItem('kb_bal',bal);balEl.textContent=bal}
-function reqDep(){let n=document.getElementById('depName').value,p=document.getElementById('depPhone').value,a=document.getElementById('depAmt').value,tx=document.getElementById('depTx').value;if(!n||!p||!a||!tx){alert('Fill NAME, PHONE, AMOUNT, TxID');return}let list=JSON.parse(localStorage.getItem('kb_deps')||'[]');list.push({id:Date.now(),name:n,phone:p,amt:a,tx:tx,status:'pending',time:new Date().toLocaleString()});localStorage.setItem('kb_deps',JSON.stringify(list));document.getElementById('depStat').innerHTML='⏳ Pending! Admin will approve '+n+' ('+p+')';}
-function reqWit(){let n=document.getElementById('witName').value,ph=document.getElementById('witPhone').value,a=document.getElementById('witAmt').value;if(!n||!ph||!a){alert('Fill NAME, PHONE, AMOUNT');return}if(parseInt(a)>bal){alert('Low balance!');return}let list=JSON.parse(localStorage.getItem('kb_wits')||'[]');list.push({id:Date.now(),name:n,phone:ph,amt:a,status:'pending',time:new Date().toLocaleString()});localStorage.setItem('kb_wits',JSON.stringify(list));bal-=parseInt(a);saveBal();document.getElementById('witStat').innerHTML='⏳ Withdraw pending for '+n+' to '+ph;}
-function drawPlane(x,y){ctx.save();ctx.translate(x,y);ctx.rotate(-0.18);ctx.fillStyle='#ff2a2a';ctx.beginPath();ctx.moveTo(-36,-7);ctx.lineTo(36,0);ctx.lineTo(-36,7);ctx.lineTo(-26,0);ctx.closePath();ctx.fill();ctx.fillStyle='#7ec8ff';ctx.beginPath();ctx.arc(16,-1,5,0,6.28);ctx.fill();ctx.restore();}
-function draw(){ctx.clearRect(
+function copyNum(){navigator.clipboard.writeText('0785344451');alert('Copied: 0785344451');}
+function getCrash(){let r=Math.random();if(r<0.5)return 1.1+Math.random()*0.8;if(r<0.8)return 2+Math.random()*2;if(r<0.92)return 4+Math.random()*3;return 7+Math.random()*8}
+function placeBet(){let a=parseInt(document.getElementById('betIn').value);if(isNaN(a)||a<100||a>20000){alert('Bet must 100 to 20000!');return}if(bal<=0){alert('0 UGX! Deposit min 500 & wait admin approve!');return}if(a>bal){alert('Low balance!');return}if(hasBet)return;if(a<0||bal<0){alert('Negative blocked!');return}betAmt=a;hasBet=true;bal-=a;if(bal<0)bal=0;localStorage.setItem('kb_bal',bal);balEl.textContent=bal;betBtn.style.display='none';cashBtn.style.display='block';sEl.textContent='BET '+a+' UGX PLACED';}
+function doCash(){if(!hasBet||state!=='fly')return;let win=Math.floor(betAmt*mult);if(win>500000)win=500000;bal+=win;if(bal<0)bal=0;localStorage.setItem('kb_bal',bal);balEl.textContent=bal;sEl.textContent='WIN '+win+' UGX at '+mult.toFixed(2)+'x!';hasBet=false;betBtn.style.display='block';cashBtn.style.display='none';}
+function reqDep(){let n=document.getElementById('depName').value.trim(),p=document.getElementById('depPhone').value.trim(),net=document.getElementById('depNet').value,a=document.getElementById('depAmt').value.trim(),tx=document.getElementById('depTx').value.trim().toUpperCase();if(!n||!p||!net||!a||!tx){alert('Fill Full Name, Number, Network, Amount, TxID!');return}if(parseInt(a)<500){alert('Min Deposit 500 UGX!');return}let list=JSON.parse(localStorage.getItem('kb_deps')||'[]');if(list.some(x=>x.tx===tx)){alert('Duplicate TxID blocked! Fake!');return}list.push({id:Date.now(),name:n,phone:p,network:net,amt:parseInt(a),tx:tx,status:'pending',time:new Date().toLocaleString()});localStorage.setItem('kb_deps',JSON.stringify(list));document.getElementById('depStat').innerHTML='⏳ Pending! Admin will approve '+n+' - '+a+' UGX';document.getElementById('depName').value='';document.getElementById('depPhone').value='';document.getElementById('depAmt').value='';document.getElementById('depTx').value='';}
+function reqWit(){let a=document.getElementById('witAmt').value.trim(),ph=document.getElementById('witPhone').value.trim(),nm=document.getElementById('witName').value.trim();if(!a||!ph||!nm){alert('Fill Amount, Number, MoMo Name!');return}if(parseInt(a)<3000){alert('Min Withdraw 3000 UGX!');return}if(parseInt(a)>bal){alert('Low balance!');return}if(bal<0||parseInt(a)<0){alert('Blocked!');return}let list=JSON.parse(localStorage.getItem('kb_wits')||'[]');list.push({id:Date.now(),name:nm,phone:ph,amt:parseInt(a),status:'pending',time:new Date().toLocaleString()});localStorage.setItem('kb_wits',JSON.stringify(list));bal-=parseInt(a);if(bal<0)bal=0;localStorage.setItem('kb_bal',bal);balEl.textContent=bal;document.getElementById('witStat').innerHTML='⏳ Withdraw pending for '+nm+' to '+ph+' - '+a+' UGX';document.getElementById('witAmt').value='';document.getElementById('witPhone').value='';document.getElementById('witName').value='';}
+function drawPlane(x,y){ctx.save();ctx.translate(x,y);ctx.rotate(-0.18);ctx.fillStyle='#ff2a2a';ctx.beginPath();ctx.moveTo(-38,-8);ctx.lineTo(38,0);ctx.lineTo(-38,8);ctx.lineTo(-28,0);ctx.closePath();ctx.fill();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(18,-1,6,0,6.28);ctx.fill();ctx.fillStyle='#7ec8ff';ctx.beginPath();ctx.arc(19,-1,4,0,6.28);ctx.fill();ctx.restore();}
+function draw(){ctx.clearRect(0,0,W,H);ctx.fillStyle='rgba(255,255,255,0.05)';for(let i=0;i<W;i+=40)ctx.fillRect(i,0,1,H);for(let i=0;i<H;i+=40)ctx.fillRect(0,i,W,1);if(trail.length>1){ctx.strokeStyle='#ff2040';ctx.lineWidth=5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(trail[0].x,trail[0].y);for(let i=1;i<trail.length;i++)ctx.lineTo(trail[i].x,trail[i].y);ctx.stroke();}if(state!=='wait')drawPlane(px,py);else drawPlane(80,H-60);}
+function loop(){if(state==='fly'){let e=(Date.now()-t0)/1000;mult=Math.pow(1.08,e);if(mult>=crash){state='crash';mEl.textContent=crash.toFixed(2)+'x';mEl.style.color='#ff2040';sEl.textContent='💥 CRASHED '+crash.toFixed(2)+'x';if(hasBet){hasBet=false;betBtn.style.display='block';cashBtn.style.display='none';sEl.textContent='LOST '+betAmt+' UGX';}setTimeout(()=>{rnd++;document.getElementById('rnd').textContent=rnd;state='wait';mEl.textContent='1.00x';mEl.style.color='#fff';sEl.textContent='⏳ NEXT ROUND IN 3 SEC...';trail=[];setTimeout(()=>{state='fly';crash=getCrash();t0=Date.now();trail=[{x:80,y:H-60}];mult=1;px=80;py=H-60;},3000)},1500);}else{mEl.textContent=mult.toFixed(2)+'x';if(mult<2)mEl.style.color='#fff';else if(mult<5)mEl.style.color='#00ff88';else mEl.style.color='#ffcc00';sEl.textContent='✈️ FLYING '+mult.toFixed(2)+'x';let pr=Math.min(e/12,1);px=80+pr*(W-160);py=(H-60)-pr*(H-140);trail.push({x:px-20,y:py});if(trail.length>100)trail.shift();if(hasBet){let w=Math.floor(betAmt*mult);if(w>500000)w=500000;cashBtn.innerHTML='CASHOUT '+w+' UGX<br><small>'+mult.toFixed(2)+'x</small>';}}}draw();requestAnimationFrame(loop);}loop();setTimeout(()=>{state='fly';crash=getCrash();t0=Date.now();trail=[{x:80,y:H-60}];},2000);setInterval(()=>{document.getElementById('on').textContent=Math.floor(380+Math.random()*90)},2500);
+</script>
+</body>
+                                                                                                                                                                                                                                         </html>
